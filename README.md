@@ -8,6 +8,18 @@ Welcome to BeeMail 2.0, the buzziest messaging service in the world!
 
 Why 2.0, I hear you ask? Well, read on dear developer...
 
+## From Charlie :wave:
+
+Hey the demo from the session is included in the repo in the `src/main/java/demo` package, the workshop is in
+`src/main/java/beemail`.
+
+The class diagrams for each project are in `src/main/resources`.
+
+### Things to Note
+
+- The class diagrams UML have been completed quickly so might not be correct.
+- In the workshop project instead of calling my Mediator App I call it Messenger.
+
 ## Background
 
 When we built 1.0, we only had a `User` class. Users sent messages _directly_ to
@@ -60,3 +72,4 @@ To get started:
   better solution than users messaging each other directly?
 
 - Check the extensions for a task requiring the **adapter** pattern.
+
