@@ -25,8 +25,8 @@ public class Message {
         System.out.format("| Field           | Value                          |%n");
         System.out.format("+-----------------+--------------------------------+%n");
         System.out.format(format, "Created", timestamp);
-        System.out.format(format, "From", from != null ? from.getUserName() : "Unknown");
-        System.out.format(format, "To", to != null ? to.getUserName() : "Unknown");
+        System.out.format(format, "From", from.getUserName());
+        System.out.format(format, "To", to.getUserName());
         System.out.format(format, "Content", content);
         System.out.format(format, "Delivered", delivered);
         System.out.format(format, "Read", read);

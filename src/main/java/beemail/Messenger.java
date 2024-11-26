@@ -5,18 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class App implements MessageMediator {
+public class Messenger implements MessageMediator {
 
-    private static App app = null;
+    private static Messenger messenger = null;
 
-    public static App getInstance() {
-        if (app == null) {
-            app = new App();
+    public static Messenger getInstance() {
+        if (messenger == null) {
+            messenger = new Messenger();
         }
-        return app;
+        return messenger;
     }
 
-    private App() {
+    private Messenger() {
     }
 
     private final List<User> users = new ArrayList<>();

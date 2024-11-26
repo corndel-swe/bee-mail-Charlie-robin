@@ -2,7 +2,6 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
     abstract class Device {
         protected String location
         protected Mediator mediator
@@ -41,7 +40,7 @@
         +void turnOn()
     }
 
-    Device <-> SmartHome
+    Device <-> Mediator
 
 @enduml
 
