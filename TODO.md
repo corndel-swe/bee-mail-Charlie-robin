@@ -13,26 +13,26 @@ graph TD
         D(User4)
         E(User5)
     end
-    A <--> |message| App
-    B <--> |message| App
-    C <--> |message| App
-    D <--> |message| App
-    E <--> |message| App
+    A <-->|message| App
+    B <-->|message| App
+    C <-->|message| App
+    D <-->|message| App
+    E <-->|message| App
 ```
 
 ## App
 
 ```mermaid
 classDiagram
-  class App {
-    -User[] users
-    +addUser(user: User)
-    +findUser(userId: str)
-    +deliverMessage(senderId: str, recipientId: str, content: str)
-  }
+    class App {
+        -User[] users
+        +addUser(user: User)
+        +findUser(userId: str)
+        +deliverMessage(senderId: str, recipientId: str, content: str)
+    }
 ```
 
-- `users` is a collection of all users who have logged into the app
+- `users` is a collection of all users who have logged into the messenger
 
 - `addUser()` handles adding a new user to the `users` collection
 
@@ -46,16 +46,16 @@ classDiagram
 
 ```mermaid
 classDiagram
-  class User {
-    -string id
-    -string username
-    -Message[] inbox
-    -App app
-    +login(app: App)
-    +sendMessage(recipientId: str, content: str)
-    +receiveMessage(message: Message)
-    +readMessage(idx: int)
-  }
+    class User {
+        -string id
+        -string username
+        -Message[] inbox
+        -App messenger
+        +login(messenger: App)
+        +sendMessage(recipientId: str, content: str)
+        +receiveMessage(message: Message)
+        +readMessage(idx: int)
+    }
 ```
 
 - `id` is a unique string which identifies the user
@@ -64,9 +64,9 @@ classDiagram
 
 - `inbox` is a list of messages the user has received
 
-- `app` is the instance of `App` the user is logged into
+- `messenger` is the instance of `App` the user is logged into
 
-- `login(app)` adds the user to `app.users` and also sets `user.app` to `app`
+- `login(messenger)` adds the user to `messenger.users` and also sets `user.messenger` to `messenger`
 
 - `sendMessage()` creates a new message and adds it to the `messages` array of
   the recipient user
@@ -80,18 +80,18 @@ classDiagram
 
 ```mermaid
 classDiagram
-  class Message {
-    -str id
-    -datetime timestamp
-    -str content
-    -User from
-    -User to
-    -bool delivered
-    -bool read
-    +log()
-    +markDelivered()
-    +markRead()
-  }
+    class Message {
+        -str id
+        -datetime timestamp
+        -str content
+        -User from
+        -User to
+        -bool delivered
+        -bool read
+        +log()
+        +markDelivered()
+        +markRead()
+    }
 ```
 
 - `id` is a unique id which identifies the message
@@ -122,19 +122,15 @@ sequenceDiagram
     participant App
     participant Recipient
     participant Message
-
     User ->> App: login()
-    App -->> User: set app
+    App -->> User: set messenger
     App ->> App: add user to users
-
     User ->> App: sendMessage()
     App ->> Message: createMessage()
     App ->> App: findUser(recipientId)
     App ->> Recipient: deliverMessage()
-
     Recipient ->> Recipient: receiveMessage()
     App ->> Message: markDelivered()
-
     Recipient ->> Recipient: readMessage()
     Recipient ->> Message: markRead()
     Recipient ->> Message: log()
@@ -147,7 +143,7 @@ definitely worth testing:
 
 - Users, Messages and App can be created with the correct properties
 
-- Users can log in to the app
+- Users can log in to the messenger
 
 - User 1 can send a message to User 2
 
@@ -170,12 +166,12 @@ Feel free to add more!
 - **Different message protocol**: Let's suppose BeeMail wants to integrate with
   a different messaging service, and so we have an `ExternalMessage` class which
 
-  - has `body` instead of content
+    - has `body` instead of content
 
-  - no `timestamp`
+    - no `timestamp`
 
-  - and the `markRead` method is actually a `toggleRead` method which flips the
-    `read` boolean
+    - and the `markRead` method is actually a `toggleRead` method which flips the
+      `read` boolean
 
   Implement this class, then create an **adapter** class which wraps it to make
   it compatible with the regular `Message` interface.
