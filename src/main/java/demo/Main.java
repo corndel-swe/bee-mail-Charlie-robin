@@ -18,5 +18,25 @@ public class Main {
         smartHome.addDevice(List.of(cameraLivingRoom, cameraKitchen, lightLivingRoom, lightKitchen));
 
         cameraLivingRoom.detectMotion();
+
+        DoorbellAdapter doorbellAdapter = new DoorbellAdapter("Front door");
+        Doorbell doorbell = new Doorbell();
+
+//        smartHome.addDevice(doorbell);
+
+        smartHome.addDevice(doorbellAdapter);
+
+        doorbellAdapter.ring();
+
+        System.out.println("Is the doorbell ringing? " + doorbellAdapter.isRinging());
+
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Is the doorbell ringing? " + doorbellAdapter.isRinging());
     }
+
 }

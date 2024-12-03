@@ -40,7 +40,24 @@
         +void turnOn()
     }
 
+ class Doorbell {
+        - boolean isRinging
+        + Doorbell()
+        + boolean isRinging()
+        + void ring()
+        + void stopRinging()
+    }
+
+    class DoorbellAdapter extends Device {
+        - final Doorbell doorbell
+        + DoorbellAdapter(String location)
+        + void ring()
+        + void action()
+    }
+
+
     Device <-> Mediator
+    DoorbellAdapter -> Doorbell : uses
 
 @enduml
 
